@@ -195,7 +195,6 @@ header {
   margin-top: 20px;
 }
 
-
 .configure-window .btn {
   display: inline-block;
   padding: 10px 20px;
@@ -209,6 +208,11 @@ header {
   background: white;
   color: black;
   border: 1px solid black;
+}
+
+.configure-window .config_note {
+  font-size: 1.8rem;
+  display: inline;
 }
 
 .configure-window .config_save {
@@ -263,7 +267,7 @@ header {
     </header>
 
     <div class="result-list" v-if="search != '' && filteredItems.length > 0">
-      <h1 class="category-title">SEARCH</h1>
+      <h1 class="category-title">{{ $t('main.search') | uppercase }}</h1>
       <ul class="links-list">
         <li class="link" v-for="link in filteredItems" data-id="{{link.id}}" data-index="{{$index}}" v-bind:class="{on: $index == selectedIndex}">
           <a v-bind:href="link.href" target="_blank">{{link.label}}</a>
@@ -272,7 +276,7 @@ header {
     </div>
 
     <div class="result-list" v-if="filteredItems.length == 0">
-      <h1 class="category-title">GO TO</h1>
+      <h1 class="category-title">{{ $t('main.go_to') | uppercase }}</h1>
       <h2 class="go-to-url">{{{ go_to_url }}}</h2>
     </div>
 
@@ -291,6 +295,11 @@ header {
 <script>
 
   var Vue = require('vue');
+  var i18n = require('vue-i18n');
+  Vue.config.debug = true;
+
+  //Vue.config.lang = 'es';
+
   var SearchBar = require('./search-bar.vue');
   var Weather = require('./weather.vue');
   var Profile = require('./profile.vue');
@@ -304,7 +313,25 @@ header {
 
   var App = Vue.extend({
 
+    created: function(){
+      Vue.use(i18n, {
+        lang: this.config.profile.language,
+        locales: require('../locales.json')
+      });
+    },
+
     ready: function(){
+
+        // this.$watch('config.profile.language', (function(lang){
+        //   console.log(lang);
+        //   Vue.config.lang = lang;
+        // }).bind(this), {immediate: true});
+
+        this.$watch('config.profile.font', (function(value){
+          document.body.style.fontFamily = this.config.profile.fonts[value].name;
+        }).bind(this), {immediate: true});
+
+
 
         var self, loadFunc;
 
@@ -354,8 +381,22 @@ header {
           },
           clock: {
             format: 24
+          },
+          profile: {
+            languages: [
+              {code: 'en', name: 'English'},
+              {code: 'es', name: 'Spanish'}
+            ],
+            language: 'es',
+            fonts: [
+              {name: 'Raleway'},
+              {name: 'Helvetica'},
+              {name: 'Helvetica Neue'},
+              {name: 'PT Sans'},
+              {name: 'Input Sans Compressed'}
+            ],
+            font: 0
           }
-
         }
       }
     },

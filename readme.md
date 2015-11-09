@@ -42,3 +42,9 @@ watchify -t vueify -e _src/main.js -o build.js
 - [ ] Profile image upload
 - [x] Sync
 - [ ] Backgrounds?
+- [ ] Fonts
+- [ ] Language Flags
+- [ ] Themes
+- [ ] Dropify for profile image
+- [ ] copyright - open source page
+- [ ] Drag & drop in edit mode with dragula

@@ -20,6 +20,7 @@
     "babel-runtime": "^5.8.29",
     "vue": "^1.0.6",
     "vue-hot-reload-api": "^1.2.1",
+    "vue-i18n": "^2.2.0",
     "vue-router": "^0.7.5",
     "vueify": "^5.0.3",
     "vueify-insert-css": "^1.0.0"

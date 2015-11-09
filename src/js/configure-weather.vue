@@ -15,27 +15,27 @@
   <div v-el:modal class="configure-modal modal">
     <div class="configure-window window">
       <div class="close-btn" v-on:click="close()"></div>
-      <h1 class="title">WEATHER</h1>
+      <h1 class="title">{{ $t('weather.weather') | uppercase }}</h1>
       <hr>
       <div class="row">
-        <label for="config_country">YOUR COUNTRY</label>
+        <label for="config_country">{{ $t('weather.country') | uppercase }}</label>
         <select name="config_country" id="config_country" v-on:change="configTmp.city=''" v-model="configTmp.country">
           <option v-for="country in config.weather.countries" value="{{country.code}}">{{country.name}}</option>
         </select>
       </div>
       <div class="row">
-        <label for="config_city">YOUR CITY</label>
+        <label for="config_city">{{ $t('weather.city') | uppercase }}</label>
         <input id="config_city" type="text" v-model="configTmp.city">
       </div>
       <div class="row weather_units">
-        <label for="config_city">UNIT</label>
-        <span class="weather_unit unit_f">°F</span>
+        <label for="config_city">{{ $t('weather.unit') | uppercase }}</label>
+        <span class="weather_unit unit_f">{{ $t('weather.unit_f') | uppercase }}</span>
         <input type="radio" id="unit_f" value="f" v-model="configTmp.unit">
-        <span class="weather_unit unit_c">°C</span>
+        <span class="weather_unit unit_c">{{ $t('weather.unit_c') | uppercase }}</span>
         <input type="radio" id="unit_c" value="c" v-model="configTmp.unit">
       </div>
       <div class="row save">
-        <button class="btn config_save" v-on:click="save()">SAVE</button>
+        <button class="btn config_save" v-on:click="save()">{{ $t('main.save') | uppercase }}</button>
       </div>
     </div>
   </div>

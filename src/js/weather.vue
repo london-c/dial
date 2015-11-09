@@ -60,7 +60,7 @@
     },
 
     ready: function(){
-      this.interval = setInterval(this.getWeather.bind(this), 6000);
+      this.interval = setInterval(this.getWeather.bind(this), 60000);
       this.getWeather();
 
       this.$watch('config.unit + config.city + config.country', (function(){
@@ -88,7 +88,7 @@
         return 'wi-yahoo-' + this.weather.code;
       },
       description: function(){
-        return this.weather.text;
+        return this.$t('weather.descriptions['+this.weather.code+']');
       }
     },
 
@@ -118,13 +118,11 @@
           unit = this.config.weather.unit.toLowerCase();
 
         this.jsonp("https://query.yahooapis.com/v1/public/yql?q=select item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='"+city+", "+country+"') and u='"+unit+"'&format=json&u=c", (function(data) {
-//        this.jsonp("https://query.yahooapis.com/v1/public/yql?q=select item.condition from weather.forecast where woeid = 753692 and u='c'&format=json&u=c", (function(data) {
            this.weather = data.query.results.channel.item.condition;
         }).bind(this));
 
       }
     }
-
   });
 
 </script>

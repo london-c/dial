@@ -27,48 +27,48 @@
 
 <script>
 
-var Vue = require('vue');
-var ConfigureClock = require('./configure-clock.vue');
+  var Vue = require('vue');
+  var ConfigureClock = require('./configure-clock.vue');
 
-module.exports = Vue.extend({
+  module.exports = Vue.extend({
 
-  props: ["config"],
+    props: ["config"],
 
-  components: {
-    'configure-clock': ConfigureClock
-  },
-
-  ready: function(){
-    this.timerId = setInterval(this.updateTimer.bind(this), 1000);
-  },
-
-  data: function(){
-    return {
-      now: new Date()
-    };
-  },
-
-  methods: {
-    updateTimer: function(){
-      this.now = new Date()
+    components: {
+      'configure-clock': ConfigureClock
     },
 
-    openConf: function(){
-      this.$refs.configurator.open();
-    }
-  },
+    ready: function(){
+      this.timerId = setInterval(this.updateTimer.bind(this), 1000);
+    },
 
-  computed: {
-    time: function(){
-      var minutes = this.now.getMinutes();
-      minutes = minutes < 10 ? '0' + minutes : minutes;
-      var hours = this.now.getHours();
-      var pmam_str = hours < 12 ? ' am' : ' pm';
-      hours = this.config.clock.format == 12 ? hours % 12 : hours;
-      return hours + ':' + minutes + (this.config.clock.format == 12 ? pmam_str : '');
-    }
-  }
+    data: function(){
+      return {
+        now: new Date()
+      };
+    },
 
-});
+    methods: {
+      updateTimer: function(){
+        this.now = new Date()
+      },
+
+      openConf: function(){
+        this.$refs.configurator.open();
+      }
+    },
+
+    computed: {
+      time: function(){
+        var minutes = this.now.getMinutes();
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var hours = this.now.getHours();
+        var pmam_str = hours < 12 ? ' am' : ' pm';
+        hours = this.config.clock.format == 12 ? hours % 12 : hours;
+        return hours + ':' + minutes + (this.config.clock.format == 12 ? pmam_str : '');
+      }
+    }
+
+  });
 
 </script>

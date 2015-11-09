@@ -17,17 +17,17 @@
   <div v-el:modal class="configure-modal modal">
     <div class="configure-window window">
       <div class="close-btn" v-on:click="close()"></div>
-      <h1 class="title">CLOCK</h1>
+      <h1 class="title">{{ $t('clock.clock') | uppercase }}</h1>
       <hr>
       <div class="row clock_formats">
-        <label for="clock_format">FORMAT</label>
-        <span class="clock_format format12">12h</span>
+        <label for="clock_format">{{ $t('clock.format') | uppercase }}</label>
+        <span class="clock_format format12">{{ $t('clock.h12') | uppercase }}</span>
         <input type="radio" id="format12" value="12" v-model="configTmp.clock.format">
-        <span class="clock_format format24">24h</span>
+        <span class="clock_format format24">{{ $t('clock.h24') | uppercase }}</span>
         <input type="radio" id="format24" value="24" v-model="configTmp.clock.format">
       </div>
       <div class="row save">
-        <button class="btn config_save" v-on:click="save()">SAVE</button>
+        <button class="btn config_save" v-on:click="save()">{{ $t('main.save') | uppercase }}</button>
       </div>
     </div>
   </div>
@@ -36,7 +36,6 @@
 <script>
 
 var Vue = require('vue');
-Vue.config.debug = true;
 
 module.exports = Vue.extend({
 
@@ -64,9 +63,6 @@ methods: {
     this.configTmp.clock.format = this.config.clock.format;
     this.$els.modal.classList.remove('on');
   }
-},
-
-computed: {
 }
 
 });

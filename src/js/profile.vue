@@ -3,6 +3,12 @@
     display: inline-block;
     vertical-align: top;
     margin-right: 20px;
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  .profile:hover {
+    opacity: 0.7;
   }
 
   .profile .img {
@@ -26,19 +32,24 @@
 </style>
 
 <template>
-  <div class="profile">
+  <div class="profile" v-on:click="openConf()">
     <div class="img"></div>
-    <!-- <div class="name">singuerinc</div> -->
   </div>
+  <configure-profile v-ref:configurator v-bind:config.sync="config"></configure-profile>
 </template>
 
 <script>
 
 var Vue = require('vue');
+var ConfigureProfile = require('./configure-profile.vue');
 
 module.exports = Vue.extend({
 
   props: ["config"],
+
+  components: {
+    'configure-profile': ConfigureProfile
+  },
 
   data: function(){
     return {
@@ -46,7 +57,9 @@ module.exports = Vue.extend({
   },
 
   methods: {
-
+    openConf: function(){
+      this.$refs.configurator.open();
+    }
   }
 
 });
